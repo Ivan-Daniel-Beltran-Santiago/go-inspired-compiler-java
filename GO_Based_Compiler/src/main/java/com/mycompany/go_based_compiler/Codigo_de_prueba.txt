@@ -1,0 +1,9 @@
+/*345.34.3*45.8*/
+
+package main
+import("peluche")
+import("patitas")
+
+func main(){
+    peluche.println("peluche patitas")
+}
