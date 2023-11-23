@@ -212,7 +212,7 @@ class Analisis_Lexico{
     private void AnalizarCodigoArray(){
         try{
             //Tomamos el txt y lo convertimos en una lista de Strings, una por cada linea de código
-        List<String> codigoAnalizarArchivo = Files.readAllLines(Paths.get(Archivo_a_compilar), StandartCharsets.UTF_8);
+        List<String> codigoAnalizarArchivo = Files.readAllLines(Paths.get(Archivo_a_compilar), StandardCharsets.UTF_8);
         //Las unimos todas para que sea un solo String
         String codigoAnalizarString = String.join("", codigoAnalizarArchivo);
         //Lo convertimos todo en un arreglo de tamaño fijo donde cada elemento es un caracter, incluyendo saltos de linea y la vaina
