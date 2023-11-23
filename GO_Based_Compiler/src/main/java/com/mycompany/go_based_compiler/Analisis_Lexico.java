@@ -243,7 +243,7 @@ class Analisis_Lexico{
                     }
 
                     if (ValorMatrizTransicion == 100 || ValorMatrizTransicion == 101 || ValorMatrizTransicion == 102 || ValorMatrizTransicion == 106 || ValorMatrizTransicion == 108 || ValorMatrizTransicion == 109 || ValorMatrizTransicion == 116 || ValorMatrizTransicion == 127 || ValorMatrizTransicion == 203){
-                        Codigo_a_analizar.seek(Codigo_a_analizar.getFilePointer() - 1); // Retrocede a una posición el apuntador
+                        indice--; // Retrocede a una posición el apuntador
                     }
                     else { 
                         Lexema = Lexema + (char)Caracter;
