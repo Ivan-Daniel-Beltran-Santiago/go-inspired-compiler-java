@@ -225,7 +225,7 @@ class Analisis_Lexico{
 
             Columna = asignarNumeroColumna();
 
-            ValorMatrizTransicion = MatrizTransicion[Estado][Columna]
+            ValorMatrizTransicion = MatrizTransicion[Estado][Columna];
 
             if (ValorMatrizTransicion < 100){ // Cambiar de estado
                     Estado = ValorMatrizTransicion;
@@ -261,16 +261,6 @@ class Analisis_Lexico{
             ImprimeNodosAnalizadorLexico();
         }catch (IOException e) {
             System.out.println(e.getMessage());
-        } finally {
-            try {
-                if(Codigo_a_analizar != null){
-                    Codigo_a_analizar.close();
-                }
-            }
-            catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
-        }
         }
     }
     
