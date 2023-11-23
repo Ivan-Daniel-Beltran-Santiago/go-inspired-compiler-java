@@ -98,7 +98,7 @@ class Analisis_Lexico{
     
     public Analisis_Lexico(){
         solicitarNombreDirectorio();
-        AnalizarCodigo();
+        AnalizarCodigoArray();
     }
 
     private void solicitarNombreDirectorio(){
@@ -202,6 +202,71 @@ class Analisis_Lexico{
             catch (IOException e) {
                 System.out.println(e.getMessage());
             }
+        }
+    }
+
+    private void AnalizarCodigoArray(){
+        try{
+            //Tomamos el txt y lo convertimos en una lista de Strings, una por cada linea de código
+        List<String> codigoAnalizarArchivo = Files.readAllLines(Paths.get(Archivo_a_compilar), StandartCharsets.UTF_8);
+        //Las unimos todas para que sea un solo String
+        String codigoAnalizarString = String.join("", codigo);
+        //Lo convertimos todo en un arreglo de tamaño fijo donde cada elemento es un caracter, incluyendo saltos de linea y la vaina
+        char[] codigoAnalizar = codigoAnalizarString.toCharArray();
+
+        //Recorremos el arreglo uno por uno, imposible leer mas caracteres de los que hay
+        for(int indice = 0; indiceCodigoAnalizar < codigoAnalizar.length; indice++){
+            //Ya que caracter es un entero, tomamos el elemento del indice correspondiente, y lo convertimos a su modo ASCII
+            Caracter = (int)codigoAnalizar[indice]
+
+            Columna = asignarNumeroColumna();
+
+            ValorMatrizTransicion = MatrizTransicion[Estado][Columna]
+
+            if (ValorMatrizTransicion < 100){ // Cambiar de estado
+                    Estado = ValorMatrizTransicion;
+
+                    if (Estado == 0){
+                        Lexema = "";
+                    }
+                    else {
+                        Lexema = Lexema + (char)Caracter;
+                    }
+                }
+                else if (ValorMatrizTransicion >= 100 && ValorMatrizTransicion < 500){ // Estado final
+                    if (ValorMatrizTransicion == 100){
+                        ValidaSiEsPalabraReservada();
+                    }
+
+                    if (ValorMatrizTransicion == 100 || ValorMatrizTransicion == 101 || ValorMatrizTransicion == 102 || ValorMatrizTransicion == 106 || ValorMatrizTransicion == 108 || ValorMatrizTransicion == 109 || ValorMatrizTransicion == 116 || ValorMatrizTransicion == 127 || ValorMatrizTransicion == 203){
+                        Codigo_a_analizar.seek(Codigo_a_analizar.getFilePointer() - 1); // Retrocede a una posición el apuntador
+                    }
+                    else { 
+                        Lexema = Lexema + (char)Caracter;
+                    }
+
+                    InserteNodoLexico();
+                    Estado = 0;
+                    Lexema = "";
+                } else { // Estado de error
+                    ImprimeMensajeError();
+                    break;
+                }
+            }
+            
+            ImprimeNodosAnalizadorLexico();
+        }catch (IOException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if(Codigo_a_analizar != null){
+                    Codigo_a_analizar.close();
+                }
+            }
+            catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
         }
     }
     
