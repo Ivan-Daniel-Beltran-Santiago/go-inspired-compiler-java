@@ -223,7 +223,9 @@ class Analisis_Lexico{
             //Ya que caracter es un entero, tomamos el elemento del indice correspondiente, y lo convertimos a su modo ASCII
             Caracter = (int)codigoAnalizar[indice];
 
-            Columna = asignarNumeroColumna();
+            System.out.println("Caracter: " + codigoAnalizar[indice] + " | ASCII : " + Caracter);
+
+            Columna = asignarNumeroColumnaArray();
 
             ValorMatrizTransicion = MatrizTransicion[Estado][Columna];
 
@@ -268,6 +270,68 @@ class Analisis_Lexico{
         if(Character.isLetter(Caracter)){
             return 0;
         } else if(Character.isDigit(Caracter)){
+            return 1;
+        } else {
+            switch(Caracter){
+                case '.':
+                    return 2;
+                case '+':
+                    return 3;
+                case '-':
+                    return 4;
+                case '*':
+                    return 5;
+                case '^':
+                    return 6;
+                case '/':
+                    return 7;
+                case '<':
+                    return 8;
+                case '>':
+                    return 9;
+                case '=':
+                    return 10;
+                case '!':
+                    return 11;
+                case '&':
+                    return 12;
+                case '|':
+                    return 13;
+                case ';':
+                    return 14;
+                case ',':
+                    return 15;
+                case ':':
+                    return 16;
+                case '(':
+                    return 17;
+                case ')':
+                    return 18;
+                case '"':
+                    return 19;
+                case ' ':
+                    return 20;
+                case '{':
+                    return 25;
+                case '}':
+                    return 26;
+                case 10:
+                    {
+                        NumeroRenglon += 1;
+                        return 21;
+                    }
+                case 9:
+                    return 22;
+                default:
+                    return 24;
+            }
+        }
+    }
+
+    private int asignarNumeroColumnaArray(){
+        if(Character.isLetter((char)Caracter)){
+            return 0;
+        } else if(Character.isDigit((char)Caracter)){
             return 1;
         } else {
             switch(Caracter){
