@@ -4,6 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Scanner;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 class Analisis_Lexico{
     Nodo Cabeza_de_Nodo = null; // Cabeza
@@ -210,14 +214,14 @@ class Analisis_Lexico{
             //Tomamos el txt y lo convertimos en una lista de Strings, una por cada linea de código
         List<String> codigoAnalizarArchivo = Files.readAllLines(Paths.get(Archivo_a_compilar), StandartCharsets.UTF_8);
         //Las unimos todas para que sea un solo String
-        String codigoAnalizarString = String.join("", codigo);
+        String codigoAnalizarString = String.join("", codigoAnalizarArchivo);
         //Lo convertimos todo en un arreglo de tamaño fijo donde cada elemento es un caracter, incluyendo saltos de linea y la vaina
         char[] codigoAnalizar = codigoAnalizarString.toCharArray();
 
         //Recorremos el arreglo uno por uno, imposible leer mas caracteres de los que hay
-        for(int indice = 0; indiceCodigoAnalizar < codigoAnalizar.length; indice++){
+        for(int indice = 0; indice < codigoAnalizar.length; indice++){
             //Ya que caracter es un entero, tomamos el elemento del indice correspondiente, y lo convertimos a su modo ASCII
-            Caracter = (int)codigoAnalizar[indice]
+            Caracter = (int)codigoAnalizar[indice];
 
             Columna = asignarNumeroColumna();
 
