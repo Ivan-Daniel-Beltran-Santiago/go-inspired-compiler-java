@@ -10,7 +10,8 @@ import java.nio.file.Paths;
 import java.util.List;
 
 class Analisis_Lexico{
-    Nodo Cabeza_de_Nodo = null; // Cabeza
+    Nodo Cabeza_de_Nodo = null; // Cabeza, es decir, final del nodo
+    Nodo Inicio_Nodo = null; // Inicio del nodo, utilidad para imprimir 
     
     int Estado, Caracter = 0; // Estado y Caracter
     int Columna, ValorMatrizTransicion, NumeroRenglon = 1; // Columna, Valor de matriz de transición, y Número de renglón
@@ -214,7 +215,7 @@ class Analisis_Lexico{
             //Tomamos el txt y lo convertimos en una lista de Strings, una por cada linea de código
         List<String> codigoAnalizarArchivo = Files.readAllLines(Paths.get(Archivo_a_compilar), StandardCharsets.UTF_8);
         //Las unimos todas para que sea un solo String
-        String codigoAnalizarString = String.join("", codigoAnalizarArchivo);
+        String codigoAnalizarString = String.join(System.lineSeparator(), codigoAnalizarArchivo);
         //Lo convertimos todo en un arreglo de tamaño fijo donde cada elemento es un caracter, incluyendo saltos de linea y la vaina
         char[] codigoAnalizar = codigoAnalizarString.toCharArray();
 
@@ -223,12 +224,10 @@ class Analisis_Lexico{
             //Ya que caracter es un entero, tomamos el elemento del indice correspondiente, y lo convertimos a su modo ASCII
             Caracter = (int)codigoAnalizar[indice];
 
-            System.out.println("Caracter: " + codigoAnalizar[indice] + " | ASCII : " + Caracter);
-
-            Columna = asignarNumeroColumnaArray();
+            Columna = asignarNumeroColumnaArray(codigoAnalizar[indice]);
 
             ValorMatrizTransicion = MatrizTransicion[Estado][Columna];
-
+            
             if (ValorMatrizTransicion < 100){ // Cambiar de estado
                     Estado = ValorMatrizTransicion;
 
@@ -236,7 +235,11 @@ class Analisis_Lexico{
                         Lexema = "";
                     }
                     else {
-                        Lexema = Lexema + (char)Caracter;
+                        Lexema = Lexema + codigoAnalizar[indice];
+                    }
+                    if(Caracter == 10) {
+                        System.out.println("Salto de linea");
+                        NumeroRenglon += 1;
                     }
                 }
                 else if (ValorMatrizTransicion >= 100 && ValorMatrizTransicion < 500){ // Estado final
@@ -248,10 +251,14 @@ class Analisis_Lexico{
                         indice--; // Retrocede a una posición el apuntador
                     }
                     else { 
-                        Lexema = Lexema + (char)Caracter;
+                        Lexema = Lexema + codigoAnalizar[indice];
                     }
 
                     InserteNodoLexico();
+                    if(Caracter == 10) {
+                        System.out.println("Salto de linea");
+                        NumeroRenglon += 1;
+                    }
                     Estado = 0;
                     Lexema = "";
                 } else { // Estado de error
@@ -328,13 +335,10 @@ class Analisis_Lexico{
         }
     }
 
-    private int asignarNumeroColumnaArray(){
-        if(Character.isLetter((char)Caracter)){
-            return 0;
-        } else if(Character.isDigit((char)Caracter)){
-            return 1;
-        } else {
-            switch(Caracter){
+    private int asignarNumeroColumnaArray(char caracterEntrada){
+        if(Character.isLetter(caracterEntrada)) return 0;
+        if(Character.isDigit(caracterEntrada)) return 1;
+            switch(caracterEntrada){
                 case '.':
                     return 2;
                 case '+':
@@ -378,22 +382,19 @@ class Analisis_Lexico{
                 case '}':
                     return 26;
                 case 10:
-                    {
-                        NumeroRenglon += 1;
                         return 21;
-                    }
                 case 9:
                     return 22;
                 default:
                     return 24;
             }
-        }
     }
     
-    private void ImprimeNodosAnalizadorLexico(){    
-        while(Cabeza_de_Nodo != null){
-            System.out.println(Cabeza_de_Nodo.Lexema + " " + Cabeza_de_Nodo.Token + " " + (Cabeza_de_Nodo.Linea - 1));
-            Cabeza_de_Nodo = Cabeza_de_Nodo.Siguiente;
+    private void ImprimeNodosAnalizadorLexico(){
+        Nodo Nodo_Actual = Inicio_Nodo;
+        while(Nodo_Actual != null){
+            System.out.println("Lexema: " + Nodo_Actual.Lexema + " | Token: " + Nodo_Actual.Token + " | Linea: " + Nodo_Actual.Linea);
+            Nodo_Actual = Nodo_Actual.Siguiente;
         }
     }
     
@@ -421,7 +422,7 @@ class Analisis_Lexico{
         Nodo Node = new Nodo(Lexema, ValorMatrizTransicion, NumeroRenglon);
         
         if (Cabeza_de_Nodo == null){
-            Cabeza_de_Nodo = Node;
+            Inicio_Nodo = Cabeza_de_Nodo = Node;
         }
         else {
             Cabeza_de_Nodo.Siguiente = Node;
