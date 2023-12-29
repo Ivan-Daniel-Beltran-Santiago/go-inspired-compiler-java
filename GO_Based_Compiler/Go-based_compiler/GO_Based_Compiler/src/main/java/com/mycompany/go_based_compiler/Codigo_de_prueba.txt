@@ -1,0 +1,52 @@
+/*345.34.3*45.8*/
+
+package main;
+import ("fmt");
+
+func main(){
+    var cyrax string;
+    var ermac bool := false;
+
+    raiden := 40 + 30;
+    liukang := raiden - 20;
+    kabal := raiden / liukang;
+    noobsaibot := kabal ^ 3;
+    scorpion := noobsaibot * raiden;
+
+    fmt.scan(&cyrax);
+
+    fmt.println();
+    fmt.println("Come here!");
+    fmt.println(cyrax);
+    
+    if(!ermac){
+        for (sindel := 0; sindel <= 10; sindel := sindel + 1) {
+            if(liukang > raiden){
+                fmt.println("Come here!");
+            } else {
+                fmt.println(cyrax);
+            }
+        }
+    }
+
+    jade();
+    sektor(69, true, "Flying Thunder God!");
+
+    kitana := Kitana{false, 42, 6.9, "Toasty!"}
+}
+
+type kitana struct {
+    
+    nightwolf bool;
+    stryker int;
+    kunglao float;
+    jax string;
+}
+
+func jade (){
+    fmt.println("Get over here!");
+}
+
+func sektor (frost int, smoke bool, subzero string){
+
+}
