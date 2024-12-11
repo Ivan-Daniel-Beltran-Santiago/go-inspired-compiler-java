@@ -1,0 +1,38 @@
+/*345.34.3*45.8*/
+
+package main;
+import ("fmt");
+
+func main(){
+    var cyrax string;
+    var noobSaibot string := "Toasty!";
+    var ermac bool := false;
+
+    var ermac int;
+
+    var x int;
+    var x float;
+
+
+    raiden := 40 + 30;
+    liukang := raiden - 20;
+    kabal := raiden / liukang;
+    noobsaibot := kabal ^ 3;
+    scorpion := noobsaibot * raiden;
+
+    fmt.scan(&cyrax);
+
+    fmt.println();
+    fmt.println("Come here!");
+    fmt.println(cyrax);
+    
+    if(!ermac){
+        for (sindel := 0; sindel <= 10; sindel := sindel + 1) {
+            if(liukang > raiden){
+                fmt.println("Come here!");
+            } else {
+                fmt.println(cyrax);
+            }
+        }
+    }
+}

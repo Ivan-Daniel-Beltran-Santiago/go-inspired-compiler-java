@@ -1,0 +1,6 @@
+com/mycompany/go_based_compiler/Analisis_Sintactico.class
+com/mycompany/go_based_compiler/Analisis_Semantico.class
+com/mycompany/go_based_compiler/Analisis_Lexico.class
+com/mycompany/go_based_compiler/SistemaDeTipos.class
+com/mycompany/go_based_compiler/GO_Based_Compiler.class
+com/mycompany/go_based_compiler/Nodo.class
